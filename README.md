@@ -1,77 +1,111 @@
 # Fetta
 
-**Fetta** è un'app web per distribuire pacchi indivisibili tra più partecipanti rispettando proporzioni desiderate, minimizzando lo scarto dal target.
+> Distribute indivisible packages among multiple recipients in proportion — minimising deviation from the target weight.
 
-> **Fetta** is a web app for distributing indivisible packages among multiple recipients according to desired proportions, minimising deviation from the target.
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/giovamuge/fetta)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-## Funzionalità / Features
+---
 
-- Inserimento taglie di pacchi (peso × quantità) e proporzioni per partecipante
-- Algoritmo DFS esatto + greedy con swap per ottimizzare l'allocazione
-- Storico dei calcoli salvato in localStorage (ultimi 20)
-- Esportazione risultati in CSV e TXT
-- Tema chiaro / scuro / sistema
-- Interfaccia in italiano e inglese
+## What is Fetta?
 
-## Stack tecnico
+Fetta solves a common logistics problem: you have packages of fixed sizes and need to split the total weight among several people as fairly as possible. Enter the available package sizes, the desired proportions, and Fetta finds the optimal allocation automatically.
 
-- [Next.js 16](https://nextjs.org) — App Router, TypeScript, generazione statica
-- [shadcn/ui](https://ui.shadcn.com) — componenti basati su `@base-ui/react`
-- [Tailwind CSS v4](https://tailwindcss.com)
-- [Zod](https://zod.dev) + [react-hook-form](https://react-hook-form.com)
-- [next-themes](https://github.com/pacocoursey/next-themes) — dark mode
+Supports **Italian** and **English**, and respects your system's **dark / light** preference.
 
-## Sviluppo locale / Local development
+## Features
+
+| | |
+|---|---|
+| ⚖️ Proportional allocation | DFS exact solver + greedy-with-swaps fallback |
+| 📦 Multiple package sizes | Weight (kg) × quantity per size |
+| 🕑 History | Last 20 calculations, persisted in `localStorage` |
+| 📤 Export | Download results as **CSV** or **TXT** |
+| 🌗 Dark / light / system theme | Powered by `next-themes` |
+| 🌐 Multilingual | Italian & English, switchable at runtime |
+
+## Getting started
+
+### Prerequisites
+
+- Node.js ≥ 20
+- npm ≥ 10
+
+### Installation
 
 ```bash
-# Installa le dipendenze
+git clone https://github.com/giovamuge/fetta.git
+cd fetta
 npm install
+```
 
-# Avvia il server di sviluppo
+### Development
+
+```bash
 npm run dev
 ```
 
-Apri [http://localhost:3000](http://localhost:3000) nel browser.
+Open [http://localhost:3000](http://localhost:3000) in your browser. The app hot-reloads on every save.
+
+### Production build
 
 ```bash
-# Build di produzione
-npm run build
-
-# Avvia il server di produzione
-npm start
+npm run build   # type-checks + generates static output
+npm start       # serves the production build locally
 ```
 
-## Deploy su Vercel
+## Usage
 
-### Deploy con un click
+1. **Packages** — add one row per package size: enter the weight in kg and how many units are available.
+2. **Proportions** — add one row per recipient: enter a name and a relative weight (e.g. `2 / 3 / 5`).
+3. Press **Calculate distribution**. Fetta solves the allocation and shows:
+   - a summary card (total weight, packages used, total error, strategy);
+   - a breakdown table with target vs. assigned weight and delta per recipient.
+4. Use **CSV** or **TXT** to export the results.
+5. Previous calculations are stored automatically. Open **History** to restore any past input.
+
+## Deploy to Vercel
+
+### One-click
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/giovamuge/fetta)
 
-### Deploy manuale
+### Manual steps
 
-1. **Fork** questo repository su GitHub
-2. Vai su [vercel.com](https://vercel.com) e accedi (o crea un account gratuito)
-3. Clicca **Add New → Project**
-4. Seleziona il repository `fetta` dalla lista
-5. Vercel rileva automaticamente Next.js — nessuna configurazione necessaria
-6. Clicca **Deploy**
+1. Fork this repository on GitHub.
+2. Go to [vercel.com](https://vercel.com) and sign in (free account works).
+3. Click **Add New → Project** and import your fork.
+4. Vercel auto-detects Next.js — no configuration required.
+5. Click **Deploy**.
 
-L'app sarà online in meno di un minuto all'URL assegnato da Vercel.
+The app will be live in under a minute at the URL Vercel assigns.
 
-### Variabili d'ambiente
+> **No environment variables required.** The app is fully client-side — the solver runs in the browser and history is stored in `localStorage`.
 
-Nessuna variabile d'ambiente richiesta. L'app è completamente client-side (localStorage per la cronologia, nessun backend).
+### Custom domain
 
-### Dominio personalizzato
+In your Vercel project settings → **Domains**, add your domain and follow the DNS instructions.
 
-Nelle impostazioni del progetto Vercel → **Domains**, aggiungi il tuo dominio personalizzato e segui le istruzioni DNS.
+## Tech stack
 
-## Licenza
+| Layer | Library |
+|---|---|
+| Framework | [Next.js 16](https://nextjs.org) — App Router, TypeScript, static generation |
+| UI components | [shadcn/ui](https://ui.shadcn.com) on `@base-ui/react` |
+| Styling | [Tailwind CSS v4](https://tailwindcss.com) |
+| Forms | [react-hook-form](https://react-hook-form.com) + [Zod](https://zod.dev) |
+| Dark mode | [next-themes](https://github.com/pacocoursey/next-themes) |
 
-MIT
+## Contributing
 
-## Deploy on Vercel
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+# Lint + format
+npx prettier . --write
+npm run build          # must pass before opening a PR
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+[MIT](LICENSE) © giovamuge
