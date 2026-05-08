@@ -1,33 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Fetta
 
-## Getting Started
+**Fetta** è un'app web per distribuire pacchi indivisibili tra più partecipanti rispettando proporzioni desiderate, minimizzando lo scarto dal target.
 
-First, run the development server:
+> **Fetta** is a web app for distributing indivisible packages among multiple recipients according to desired proportions, minimising deviation from the target.
+
+## Funzionalità / Features
+
+- Inserimento taglie di pacchi (peso × quantità) e proporzioni per partecipante
+- Algoritmo DFS esatto + greedy con swap per ottimizzare l'allocazione
+- Storico dei calcoli salvato in localStorage (ultimi 20)
+- Esportazione risultati in CSV e TXT
+- Tema chiaro / scuro / sistema
+- Interfaccia in italiano e inglese
+
+## Stack tecnico
+
+- [Next.js 16](https://nextjs.org) — App Router, TypeScript, generazione statica
+- [shadcn/ui](https://ui.shadcn.com) — componenti basati su `@base-ui/react`
+- [Tailwind CSS v4](https://tailwindcss.com)
+- [Zod](https://zod.dev) + [react-hook-form](https://react-hook-form.com)
+- [next-themes](https://github.com/pacocoursey/next-themes) — dark mode
+
+## Sviluppo locale / Local development
 
 ```bash
+# Installa le dipendenze
+npm install
+
+# Avvia il server di sviluppo
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Apri [http://localhost:3000](http://localhost:3000) nel browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Build di produzione
+npm run build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Avvia il server di produzione
+npm start
+```
 
-## Learn More
+## Deploy su Vercel
 
-To learn more about Next.js, take a look at the following resources:
+### Deploy con un click
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/giovamuge/fetta)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Deploy manuale
+
+1. **Fork** questo repository su GitHub
+2. Vai su [vercel.com](https://vercel.com) e accedi (o crea un account gratuito)
+3. Clicca **Add New → Project**
+4. Seleziona il repository `fetta` dalla lista
+5. Vercel rileva automaticamente Next.js — nessuna configurazione necessaria
+6. Clicca **Deploy**
+
+L'app sarà online in meno di un minuto all'URL assegnato da Vercel.
+
+### Variabili d'ambiente
+
+Nessuna variabile d'ambiente richiesta. L'app è completamente client-side (localStorage per la cronologia, nessun backend).
+
+### Dominio personalizzato
+
+Nelle impostazioni del progetto Vercel → **Domains**, aggiungi il tuo dominio personalizzato e segui le istruzioni DNS.
+
+## Licenza
+
+MIT
+
 
 ## Deploy on Vercel
 
