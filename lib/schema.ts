@@ -14,6 +14,7 @@ export const proportionRowSchema = z.object({
 });
 
 export const fettaSchema = z.object({
+	name: z.string().max(80, "Nome troppo lungo").optional(),
 	packages: z.array(packageRowSchema).min(1, "Aggiungi almeno un pacco"),
 	proportions: z
 		.array(proportionRowSchema)

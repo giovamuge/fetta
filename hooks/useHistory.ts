@@ -17,9 +17,10 @@ export function useHistory() {
 		(
 			result: AllocationResult,
 			packages: { weightKg: number; availableCount: number }[],
-			proportions: { alias: string; weight: number }[]
+			proportions: { alias: string; weight: number }[],
+			name?: string
 		) => {
-			saveToHistory(result, packages, proportions);
+			saveToHistory(result, packages, proportions, name);
 			setEntries(loadHistory());
 		},
 		[]

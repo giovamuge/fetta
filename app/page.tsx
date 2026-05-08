@@ -5,6 +5,7 @@ import { type Resolver, FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Calculator } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { ErrorAlert } from "@/components/ErrorAlert";
 import { HistorySheet } from "@/components/HistorySheet";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
@@ -33,6 +34,7 @@ const DEFAULT_VALUES: FettaFormValues = {
 
 export default function Home() {
 	const [result, setResult] = useState<AllocationResult | null>(null);
+	const [distributionName, setDistributionName] = useState<string | undefined>();
 	const [solverError, setSolverError] = useState<string | null>(null);
 	const { entries, save, remove, clear } = useHistory();
 	const { dict } = useLocale();
@@ -50,7 +52,12 @@ export default function Home() {
 		try {
 			const allocationResult = solve(values.packages, values.proportions);
 			setResult(allocationResult);
-			save(allocationResult, values.packages, values.proportions);
+			save(
+				allocationResult,
+				values.packages,
+				values.proportions,
+				values.name || undefined
+			);
 		} catch (err) {
 			setSolverError(
 				err instanceof Error ? err.message : "Errore sconosciuto."
@@ -65,33 +72,42 @@ export default function Home() {
 			proportions: entry.proportions,
 		});
 		setResult(null);
+		setDistributionName(entry.name);
 		setSolverError(null);
 	}
 
 	return (
-		<main className="flex-1 container mx-auto max-w-5xl px-4 py-8 space-y-8">
-			{/* Header */}
-			<div className="flex items-start justify-between gap-4">
+		<>
+			{/* Navbar */}
+			<header className="sticky top-0 z-40 border-b bg-background/80 backdrop-blur supports-backdrop-filter:bg-background/60">
+				<div className="container mx-auto max-w-5xl px-4 h-14 flex items-center justify-between">
+					<span className="font-semibold text-sm flex items-center gap-2">
+						<Calculator className="size-4" />
+						{dict.appName}
+					</span>
+					<div className="flex items-center gap-2">
+						<LanguageSwitcher />
+						<ThemeToggle />
+						<HistorySheet
+							entries={entries}
+							onRestore={handleRestore}
+							onRemove={remove}
+							onClear={clear}
+						/>
+					</div>
+				</div>
+			</header>
+
+			<main className="flex-1 container mx-auto max-w-5xl px-4 py-10 space-y-8">
+				{/* Header */}
 				<div className="space-y-2">
 					<h1 className="text-4xl font-bold tracking-tight flex items-center gap-3">
-						<Calculator className="size-9" />
-						{dict.appName}
+						{dict.appTite}
 					</h1>
 					<p className="text-muted-foreground text-sm">
 						{dict.appDescription}
 					</p>
 				</div>
-				<div className="flex items-center gap-2 shrink-0">
-					<LanguageSwitcher />
-					<ThemeToggle />
-					<HistorySheet
-						entries={entries}
-						onRestore={handleRestore}
-						onRemove={remove}
-						onClear={clear}
-					/>
-				</div>
-			</div>
 
 			<FormProvider {...methods}>
 				<form
@@ -99,6 +115,14 @@ export default function Home() {
 					noValidate
 					className="space-y-4"
 				>
+					{/* Distribution name */}
+					<Input
+						type="text"
+						placeholder={dict.distributionNamePlaceholder}
+						{...methods.register("name")}
+						className="max-w-sm text-base font-medium"
+					/>
+
 					{/* Input grid */}
 					<div className="grid gap-4 md:grid-cols-2">
 						<PackageInput />
@@ -129,7 +153,8 @@ export default function Home() {
 				</form>
 			</FormProvider>
 
-			{result && <ResultsDisplay result={result} />}
-		</main>
+			{result && <ResultsDisplay result={result} name={distributionName} />}
+			</main>
+		</>
 	);
 }

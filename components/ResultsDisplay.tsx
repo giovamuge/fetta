@@ -30,6 +30,7 @@ import type { AllocationResult } from "@/lib/solver/types";
 
 interface ResultsDisplayProps {
 	result: AllocationResult;
+	name?: string;
 }
 
 function formatKg(value: number): string {
@@ -53,14 +54,14 @@ function formatPercent(weight: number, total: number): string {
 	return `${Math.round(pct * 10) / 10}%`;
 }
 
-export function ResultsDisplay({ result }: ResultsDisplayProps) {
+export function ResultsDisplay({ result, name }: ResultsDisplayProps) {
 	const totalProp = result.parts.reduce((s, p) => s + p.proportionWeight, 0);
 	const { dict } = useLocale();
 
 	return (
 		<Card>
 			<CardHeader>
-				<CardTitle>{dict.resultsTitle}</CardTitle>
+				<CardTitle>{name || dict.resultsTitle}</CardTitle>
 				<CardAction>
 					<div className="flex gap-2">
 						<Button

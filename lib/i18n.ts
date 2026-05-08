@@ -5,6 +5,7 @@ export const dictionaries = {
 	it: {
 		locale: "it" as Locale,
 		appName: "Fetta",
+		appTite: "Cosa vuoi distribuire oggi?",
 		appDescription:
 			"Distribuisci pacchi indivisibili tra più partecipanti rispettando le proporzioni desiderate, minimizzando lo scarto dal target.",
 		calculate: "Calcola distribuzione",
@@ -50,10 +51,13 @@ export const dictionaries = {
 		themeSystem: "Sistema",
 		theme: "Tema",
 		language: "Lingua",
+		distributionName: "Nome distribuzione",
+		distributionNamePlaceholder: "es. Pane di maggio",
 	},
 	en: {
 		locale: "en" as Locale,
 		appName: "Fetta",
+		appTite: "What do you want to distribute today?",
 		appDescription:
 			"Distribute indivisible packages among multiple recipients according to desired proportions, minimising the deviation from the target.",
 		calculate: "Calculate distribution",
@@ -99,6 +103,8 @@ export const dictionaries = {
 		themeSystem: "System",
 		theme: "Theme",
 		language: "Language",
+		distributionName: "Distribution name",
+		distributionNamePlaceholder: "e.g. May bread run",
 	},
 } satisfies Record<Locale, object>;
 

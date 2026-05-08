@@ -19,6 +19,7 @@ interface SerializedAllocationResult extends Omit<AllocationResult, "parts"> {
 export interface HistoryEntry {
 	id: string;
 	createdAt: number;
+	name?: string;
 	result: SerializedAllocationResult;
 	packages: { weightKg: number; availableCount: number }[];
 	proportions: { alias: string; weight: number }[];
@@ -63,11 +64,13 @@ export function loadHistory(): HistoryEntry[] {
 export function saveToHistory(
 	result: AllocationResult,
 	packages: { weightKg: number; availableCount: number }[],
-	proportions: { alias: string; weight: number }[]
+	proportions: { alias: string; weight: number }[],
+	name?: string
 ): HistoryEntry {
 	const entry: HistoryEntry = {
 		id: crypto.randomUUID(),
 		createdAt: Date.now(),
+		name: name || undefined,
 		result: serializeResult(result),
 		packages,
 		proportions,
