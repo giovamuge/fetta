@@ -59,7 +59,7 @@ function stripNonAlpha(s: string): string {
 function isHeaderLine(
 	parts: string[],
 	col0Set: Set<string>,
-	col1Set: Set<string>,
+	col1Set: Set<string>
 ): boolean {
 	if (parts.length < 2) return false;
 	const p0 = stripNonAlpha(parts[0]);
@@ -82,7 +82,7 @@ function isHeaderLine(
  * Lines starting with # are ignored as comments.
  */
 export function parsePackages(
-	content: string,
+	content: string
 ): ParseResult<{ weightKg: number; availableCount: number }> {
 	const lines = content.split(/\r?\n/);
 	const data: { weightKg: number; availableCount: number }[] = [];
@@ -90,13 +90,11 @@ export function parsePackages(
 
 	let skipNext = false;
 	const firstNonEmpty = lines.find(
-		(l) => l.trim() && !l.trim().startsWith("#"),
+		(l) => l.trim() && !l.trim().startsWith("#")
 	);
 	if (firstNonEmpty) {
 		const parts = splitLine(firstNonEmpty);
-		if (
-			isHeaderLine(parts, PACKAGE_WEIGHT_HEADERS, PACKAGE_QTY_HEADERS)
-		) {
+		if (isHeaderLine(parts, PACKAGE_WEIGHT_HEADERS, PACKAGE_QTY_HEADERS)) {
 			skipNext = true;
 		}
 	}
@@ -162,7 +160,7 @@ export function parsePackages(
  * Lines starting with # are ignored as comments.
  */
 export function parseProportions(
-	content: string,
+	content: string
 ): ParseResult<{ alias: string; weight: number }> {
 	const lines = content.split(/\r?\n/);
 	const data: { alias: string; weight: number }[] = [];
@@ -170,7 +168,7 @@ export function parseProportions(
 
 	let skipNext = false;
 	const firstNonEmpty = lines.find(
-		(l) => l.trim() && !l.trim().startsWith("#"),
+		(l) => l.trim() && !l.trim().startsWith("#")
 	);
 	if (firstNonEmpty) {
 		const parts = splitLine(firstNonEmpty);
@@ -202,7 +200,10 @@ export function parseProportions(
 
 		// Last token is the weight; everything before is the alias
 		const weightStr = parts[parts.length - 1];
-		const alias = parts.slice(0, parts.length - 1).join(" ").trim();
+		const alias = parts
+			.slice(0, parts.length - 1)
+			.join(" ")
+			.trim();
 		const w = parseFloat(weightStr);
 
 		if (!alias) {

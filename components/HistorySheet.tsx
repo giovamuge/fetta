@@ -88,7 +88,10 @@ export function HistorySheet({
 													<p className="truncate text-sm font-medium">
 														{entry.name ||
 															entry.proportions
-																.map((p) => p.alias)
+																.map(
+																	(p) =>
+																		p.alias
+																)
 																.join(", ")}
 													</p>
 													<p className="text-xs text-muted-foreground">

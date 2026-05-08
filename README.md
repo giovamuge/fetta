@@ -15,14 +15,14 @@ Supports **Italian** and **English**, and respects your system's **dark / light*
 
 ## Features
 
-| | |
-|---|---|
-| ⚖️ Proportional allocation | DFS exact solver + greedy-with-swaps fallback |
-| 📦 Multiple package sizes | Weight (kg) × quantity per size |
-| 🕑 History | Last 20 calculations, persisted in `localStorage` |
-| 📤 Export | Download results as **CSV** or **TXT** |
-| 🌗 Dark / light / system theme | Powered by `next-themes` |
-| 🌐 Multilingual | Italian & English, switchable at runtime |
+|                                |                                                   |
+| ------------------------------ | ------------------------------------------------- |
+| ⚖️ Proportional allocation     | DFS exact solver + greedy-with-swaps fallback     |
+| 📦 Multiple package sizes      | Weight (kg) × quantity per size                   |
+| 🕑 History                     | Last 20 calculations, persisted in `localStorage` |
+| 📤 Export                      | Download results as **CSV** or **TXT**            |
+| 🌗 Dark / light / system theme | Powered by `next-themes`                          |
+| 🌐 Multilingual                | Italian & English, switchable at runtime          |
 
 ## Getting started
 
@@ -59,8 +59,8 @@ npm start       # serves the production build locally
 1. **Packages** — add one row per package size: enter the weight in kg and how many units are available.
 2. **Proportions** — add one row per recipient: enter a name and a relative weight (e.g. `2 / 3 / 5`).
 3. Press **Calculate distribution**. Fetta solves the allocation and shows:
-   - a summary card (total weight, packages used, total error, strategy);
-   - a breakdown table with target vs. assigned weight and delta per recipient.
+    - a summary card (total weight, packages used, total error, strategy);
+    - a breakdown table with target vs. assigned weight and delta per recipient.
 4. Use **CSV** or **TXT** to export the results.
 5. Previous calculations are stored automatically. Open **History** to restore any past input.
 
@@ -88,13 +88,13 @@ In your Vercel project settings → **Domains**, add your domain and follow the 
 
 ## Tech stack
 
-| Layer | Library |
-|---|---|
-| Framework | [Next.js 16](https://nextjs.org) — App Router, TypeScript, static generation |
-| UI components | [shadcn/ui](https://ui.shadcn.com) on `@base-ui/react` |
-| Styling | [Tailwind CSS v4](https://tailwindcss.com) |
-| Forms | [react-hook-form](https://react-hook-form.com) + [Zod](https://zod.dev) |
-| Dark mode | [next-themes](https://github.com/pacocoursey/next-themes) |
+| Layer         | Library                                                                      |
+| ------------- | ---------------------------------------------------------------------------- |
+| Framework     | [Next.js 16](https://nextjs.org) — App Router, TypeScript, static generation |
+| UI components | [shadcn/ui](https://ui.shadcn.com) on `@base-ui/react`                       |
+| Styling       | [Tailwind CSS v4](https://tailwindcss.com)                                   |
+| Forms         | [react-hook-form](https://react-hook-form.com) + [Zod](https://zod.dev)      |
+| Dark mode     | [next-themes](https://github.com/pacocoursey/next-themes)                    |
 
 ## Contributing
 

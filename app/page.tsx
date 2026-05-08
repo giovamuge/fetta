@@ -34,7 +34,9 @@ const DEFAULT_VALUES: FettaFormValues = {
 
 export default function Home() {
 	const [result, setResult] = useState<AllocationResult | null>(null);
-	const [distributionName, setDistributionName] = useState<string | undefined>();
+	const [distributionName, setDistributionName] = useState<
+		string | undefined
+	>();
 	const [solverError, setSolverError] = useState<string | null>(null);
 	const { entries, save, remove, clear } = useHistory();
 	const { dict } = useLocale();
@@ -109,51 +111,54 @@ export default function Home() {
 					</p>
 				</div>
 
-			<FormProvider {...methods}>
-				<form
-					onSubmit={handleSubmit(onSubmit)}
-					noValidate
-					className="space-y-4"
-				>
-					{/* Distribution name */}
-					<Input
-						type="text"
-						placeholder={dict.distributionNamePlaceholder}
-						{...methods.register("name")}
-						className="max-w-sm text-base font-medium"
-					/>
-
-					{/* Input grid */}
-					<div className="grid gap-4 md:grid-cols-2">
-						<PackageInput />
-						<ProportionInput />
-					</div>
-
-					<Button type="submit" size="lg">
-						<Calculator />
-						{dict.calculate}
-					</Button>
-
-					{solverError && <ErrorAlert message={solverError} />}
-
-					{formState.errors.packages?.root && (
-						<ErrorAlert
-							message={
-								formState.errors.packages.root.message ?? ""
-							}
+				<FormProvider {...methods}>
+					<form
+						onSubmit={handleSubmit(onSubmit)}
+						noValidate
+						className="space-y-4"
+					>
+						{/* Distribution name */}
+						<Input
+							type="text"
+							placeholder={dict.distributionNamePlaceholder}
+							{...methods.register("name")}
+							className="max-w-sm text-base font-medium"
 						/>
-					)}
-					{formState.errors.proportions?.root && (
-						<ErrorAlert
-							message={
-								formState.errors.proportions.root.message ?? ""
-							}
-						/>
-					)}
-				</form>
-			</FormProvider>
 
-			{result && <ResultsDisplay result={result} name={distributionName} />}
+						{/* Input grid */}
+						<div className="grid gap-4 md:grid-cols-2">
+							<PackageInput />
+							<ProportionInput />
+						</div>
+
+						<Button type="submit" size="lg">
+							<Calculator />
+							{dict.calculate}
+						</Button>
+
+						{solverError && <ErrorAlert message={solverError} />}
+
+						{formState.errors.packages?.root && (
+							<ErrorAlert
+								message={
+									formState.errors.packages.root.message ?? ""
+								}
+							/>
+						)}
+						{formState.errors.proportions?.root && (
+							<ErrorAlert
+								message={
+									formState.errors.proportions.root.message ??
+									""
+								}
+							/>
+						)}
+					</form>
+				</FormProvider>
+
+				{result && (
+					<ResultsDisplay result={result} name={distributionName} />
+				)}
 			</main>
 		</>
 	);
