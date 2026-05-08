@@ -11,20 +11,12 @@ function DropdownMenu({ ...props }: MenuPrimitive.Root.Props) {
 }
 
 function DropdownMenuPortal({ ...props }: MenuPrimitive.Portal.Props) {
-	return (
-		<MenuPrimitive.Portal
-			data-slot="dropdown-menu-portal"
-			{...props}
-		/>
-	);
+	return <MenuPrimitive.Portal data-slot="dropdown-menu-portal" {...props} />;
 }
 
 function DropdownMenuTrigger({ ...props }: MenuPrimitive.Trigger.Props) {
 	return (
-		<MenuPrimitive.Trigger
-			data-slot="dropdown-menu-trigger"
-			{...props}
-		/>
+		<MenuPrimitive.Trigger data-slot="dropdown-menu-trigger" {...props} />
 	);
 }
 
@@ -63,9 +55,7 @@ function DropdownMenuContent({
 }
 
 function DropdownMenuGroup({ ...props }: MenuPrimitive.Group.Props) {
-	return (
-		<MenuPrimitive.Group data-slot="dropdown-menu-group" {...props} />
-	);
+	return <MenuPrimitive.Group data-slot="dropdown-menu-group" {...props} />;
 }
 
 function DropdownMenuLabel({
@@ -113,10 +103,7 @@ function DropdownMenuItem({
 
 function DropdownMenuSub({ ...props }: MenuPrimitive.SubmenuRoot.Props) {
 	return (
-		<MenuPrimitive.SubmenuRoot
-			data-slot="dropdown-menu-sub"
-			{...props}
-		/>
+		<MenuPrimitive.SubmenuRoot data-slot="dropdown-menu-sub" {...props} />
 	);
 }
 
@@ -201,9 +188,7 @@ function DropdownMenuCheckboxItem({
 	);
 }
 
-function DropdownMenuRadioGroup({
-	...props
-}: MenuPrimitive.RadioGroup.Props) {
+function DropdownMenuRadioGroup({ ...props }: MenuPrimitive.RadioGroup.Props) {
 	return (
 		<MenuPrimitive.RadioGroup
 			data-slot="dropdown-menu-radio-group"

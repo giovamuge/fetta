@@ -16,13 +16,7 @@ export function ThemeToggle() {
 	const { dict } = useLocale();
 
 	const icon =
-		theme === "light" ? (
-			<Sun />
-		) : theme === "dark" ? (
-			<Moon />
-		) : (
-			<SunMoon />
-		);
+		theme === "light" ? <Sun /> : theme === "dark" ? <Moon /> : <SunMoon />;
 
 	return (
 		<DropdownMenu>

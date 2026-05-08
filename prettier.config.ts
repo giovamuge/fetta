@@ -6,7 +6,7 @@ const config: Config = {
 	semi: true,
 	singleQuote: false,
 	trailingComma: "es5",
-	printWidth: 75,
+	printWidth: 80,
 	plugins: [],
 };
 

@@ -9,13 +9,8 @@ export const packageRowSchema = z.object({
 });
 
 export const proportionRowSchema = z.object({
-	alias: z
-		.string()
-		.min(1, "Inserire un nome")
-		.max(50, "Nome troppo lungo"),
-	weight: z.coerce
-		.number()
-		.positive("La proporzione deve essere positiva"),
+	alias: z.string().min(1, "Inserire un nome").max(50, "Nome troppo lungo"),
+	weight: z.coerce.number().positive("La proporzione deve essere positiva"),
 });
 
 export const fettaSchema = z.object({

@@ -23,10 +23,7 @@ function SheetPortal({ ...props }: SheetPrimitive.Portal.Props) {
 	return <SheetPrimitive.Portal data-slot="sheet-portal" {...props} />;
 }
 
-function SheetOverlay({
-	className,
-	...props
-}: SheetPrimitive.Backdrop.Props) {
+function SheetOverlay({ className, ...props }: SheetPrimitive.Backdrop.Props) {
 	return (
 		<SheetPrimitive.Backdrop
 			data-slot="sheet-overlay"
@@ -82,10 +79,7 @@ function SheetContent({
 	);
 }
 
-function SheetHeader({
-	className,
-	...props
-}: React.ComponentProps<"div">) {
+function SheetHeader({ className, ...props }: React.ComponentProps<"div">) {
 	return (
 		<div
 			data-slot="sheet-header"
@@ -95,10 +89,7 @@ function SheetHeader({
 	);
 }
 
-function SheetFooter({
-	className,
-	...props
-}: React.ComponentProps<"div">) {
+function SheetFooter({ className, ...props }: React.ComponentProps<"div">) {
 	return (
 		<div
 			data-slot="sheet-footer"
@@ -128,10 +119,7 @@ function SheetDescription({
 	return (
 		<SheetPrimitive.Description
 			data-slot="sheet-description"
-			className={cn(
-				"text-xs/relaxed text-muted-foreground",
-				className
-			)}
+			className={cn("text-xs/relaxed text-muted-foreground", className)}
 			{...props}
 		/>
 	);

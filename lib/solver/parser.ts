@@ -41,9 +41,7 @@ export function parsePackages(rawInput: string): PackageType[] {
 	}
 
 	if (result.length === 0) {
-		throw new Error(
-			"Il catalogo pacchi non contiene pacchi disponibili."
-		);
+		throw new Error("Il catalogo pacchi non contiene pacchi disponibili.");
 	}
 
 	return result;

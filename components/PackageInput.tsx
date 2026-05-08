@@ -30,9 +30,7 @@ export function PackageInput() {
 		<Card>
 			<CardHeader>
 				<CardTitle>{dict.packagesTitle}</CardTitle>
-				<CardDescription>
-					{dict.packagesDescription}
-				</CardDescription>
+				<CardDescription>{dict.packagesDescription}</CardDescription>
 			</CardHeader>
 			<CardContent className="space-y-3">
 				{/* Column headers */}
@@ -64,10 +62,7 @@ export function PackageInput() {
 							/>
 							{errors.packages?.[index]?.weightKg && (
 								<p className="text-xs text-destructive mt-1">
-									{
-										errors.packages[index]?.weightKg
-											?.message
-									}
+									{errors.packages[index]?.weightKg?.message}
 								</p>
 							)}
 						</div>
@@ -81,15 +76,14 @@ export function PackageInput() {
 									`packages.${index}.availableCount`
 								)}
 								aria-invalid={
-									!!errors.packages?.[index]
-										?.availableCount
+									!!errors.packages?.[index]?.availableCount
 								}
 							/>
 							{errors.packages?.[index]?.availableCount && (
 								<p className="text-xs text-destructive mt-1">
 									{
-										errors.packages[index]
-											?.availableCount?.message
+										errors.packages[index]?.availableCount
+											?.message
 									}
 								</p>
 							)}

@@ -44,10 +44,7 @@ function buildCsvContent(result: AllocationResult): string {
 		"Alias,Proporzione,Target (kg),Assegnato (kg),Delta (kg),N. Pacchi,Composizione"
 	);
 
-	const totalProp = result.parts.reduce(
-		(s, p) => s + p.proportionWeight,
-		0
-	);
+	const totalProp = result.parts.reduce((s, p) => s + p.proportionWeight, 0);
 
 	for (const part of result.parts) {
 		const delta = part.assignedWeightKg - part.targetWeightKg;

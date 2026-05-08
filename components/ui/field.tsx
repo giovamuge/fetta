@@ -7,10 +7,7 @@ import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 
-function FieldSet({
-	className,
-	...props
-}: React.ComponentProps<"fieldset">) {
+function FieldSet({ className, ...props }: React.ComponentProps<"fieldset">) {
 	return (
 		<fieldset
 			data-slot="field-set"
@@ -88,10 +85,7 @@ function Field({
 	);
 }
 
-function FieldContent({
-	className,
-	...props
-}: React.ComponentProps<"div">) {
+function FieldContent({ className, ...props }: React.ComponentProps<"div">) {
 	return (
 		<div
 			data-slot="field-content"
@@ -134,10 +128,7 @@ function FieldTitle({ className, ...props }: React.ComponentProps<"div">) {
 	);
 }
 
-function FieldDescription({
-	className,
-	...props
-}: React.ComponentProps<"p">) {
+function FieldDescription({ className, ...props }: React.ComponentProps<"p">) {
 	return (
 		<p
 			data-slot="field-description"
@@ -200,9 +191,7 @@ function FieldError({
 		}
 
 		const uniqueErrors = [
-			...new Map(
-				errors.map((error) => [error?.message, error])
-			).values(),
+			...new Map(errors.map((error) => [error?.message, error])).values(),
 		];
 
 		if (uniqueErrors?.length == 1) {
@@ -213,9 +202,7 @@ function FieldError({
 			<ul className="ml-4 flex list-disc flex-col gap-1">
 				{uniqueErrors.map(
 					(error, index) =>
-						error?.message && (
-							<li key={index}>{error.message}</li>
-						)
+						error?.message && <li key={index}>{error.message}</li>
 				)}
 			</ul>
 		);
@@ -229,10 +216,7 @@ function FieldError({
 		<div
 			role="alert"
 			data-slot="field-error"
-			className={cn(
-				"text-xs font-normal text-destructive",
-				className
-			)}
+			className={cn("text-xs font-normal text-destructive", className)}
 			{...props}
 		>
 			{content}

@@ -31,22 +31,15 @@ export function ProportionInput() {
 		<Card>
 			<CardHeader>
 				<CardTitle>{dict.proportionsTitle}</CardTitle>
-				<CardDescription>
-					{dict.proportionsDescription}
-				</CardDescription>
+				<CardDescription>{dict.proportionsDescription}</CardDescription>
 			</CardHeader>
 			<CardContent className="space-y-4">
 				{fields.map((field, index) => {
 					const errs = errors.proportions?.[index];
 					return (
-						<div
-							key={field.id}
-							className="flex gap-2 items-start"
-						>
+						<div key={field.id} className="flex gap-2 items-start">
 							<Field
-								data-invalid={
-									errs?.alias ? "true" : undefined
-								}
+								data-invalid={errs?.alias ? "true" : undefined}
 								className="flex-1"
 							>
 								<FieldLabel
@@ -58,21 +51,15 @@ export function ProportionInput() {
 									id={`proportions.${index}.alias`}
 									type="text"
 									placeholder={`es. Parte ${index + 1}`}
-									{...register(
-										`proportions.${index}.alias`
-									)}
+									{...register(`proportions.${index}.alias`)}
 								/>
 								<FieldError
-									errors={
-										errs?.alias ? [errs.alias] : []
-									}
+									errors={errs?.alias ? [errs.alias] : []}
 								/>
 							</Field>
 
 							<Field
-								data-invalid={
-									errs?.weight ? "true" : undefined
-								}
+								data-invalid={errs?.weight ? "true" : undefined}
 								className="flex-1"
 							>
 								<FieldLabel
@@ -86,14 +73,10 @@ export function ProportionInput() {
 									step="0.1"
 									min="0.001"
 									placeholder="es. 2"
-									{...register(
-										`proportions.${index}.weight`
-									)}
+									{...register(`proportions.${index}.weight`)}
 								/>
 								<FieldError
-									errors={
-										errs?.weight ? [errs.weight] : []
-									}
+									errors={errs?.weight ? [errs.weight] : []}
 								/>
 							</Field>
 

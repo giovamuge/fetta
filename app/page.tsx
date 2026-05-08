@@ -48,10 +48,7 @@ export default function Home() {
 	function onSubmit(values: FettaFormValues) {
 		setSolverError(null);
 		try {
-			const allocationResult = solve(
-				values.packages,
-				values.proportions
-			);
+			const allocationResult = solve(values.packages, values.proportions);
 			setResult(allocationResult);
 			save(allocationResult, values.packages, values.proportions);
 		} catch (err) {
@@ -118,16 +115,14 @@ export default function Home() {
 					{formState.errors.packages?.root && (
 						<ErrorAlert
 							message={
-								formState.errors.packages.root.message ??
-								""
+								formState.errors.packages.root.message ?? ""
 							}
 						/>
 					)}
 					{formState.errors.proportions?.root && (
 						<ErrorAlert
 							message={
-								formState.errors.proportions.root
-									.message ?? ""
+								formState.errors.proportions.root.message ?? ""
 							}
 						/>
 					)}

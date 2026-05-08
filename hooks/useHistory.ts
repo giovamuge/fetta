@@ -11,9 +11,7 @@ import {
 import type { AllocationResult } from "@/lib/solver/types";
 
 export function useHistory() {
-	const [entries, setEntries] = useState<HistoryEntry[]>(() =>
-		loadHistory()
-	);
+	const [entries, setEntries] = useState<HistoryEntry[]>(() => loadHistory());
 
 	const save = useCallback(
 		(

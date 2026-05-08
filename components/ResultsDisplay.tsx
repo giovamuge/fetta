@@ -54,10 +54,7 @@ function formatPercent(weight: number, total: number): string {
 }
 
 export function ResultsDisplay({ result }: ResultsDisplayProps) {
-	const totalProp = result.parts.reduce(
-		(s, p) => s + p.proportionWeight,
-		0
-	);
+	const totalProp = result.parts.reduce((s, p) => s + p.proportionWeight, 0);
 	const { dict } = useLocale();
 
 	return (
@@ -168,10 +165,8 @@ export function ResultsDisplay({ result }: ResultsDisplayProps) {
 					<TableBody>
 						{result.parts.map((part) => {
 							const delta =
-								part.assignedWeightKg -
-								part.targetWeightKg;
-							const deltaNum =
-								Math.round(delta * 1000) / 1000;
+								part.assignedWeightKg - part.targetWeightKg;
+							const deltaNum = Math.round(delta * 1000) / 1000;
 							const deltaLabel =
 								deltaNum === 0
 									? dict.deltaNoError

@@ -35,10 +35,7 @@ function computeAbsoluteError(sums: number[], targets: number[]): number {
 
 // ── Exact DFS ──────────────────────────────────────────────────────────────────
 
-function solveExact(
-	items: readonly number[],
-	targets: number[]
-): number[] {
+function solveExact(items: readonly number[], targets: number[]): number[] {
 	const n = items.length;
 	const p = targets.length;
 	const partSums = new Array<number>(p).fill(0);
@@ -125,9 +122,7 @@ function solveGreedyWithSwaps(
 				partSums[pi] += items[j] - items[i];
 				partSums[pj] += items[i] - items[j];
 
-				if (
-					computeAbsoluteError(partSums, targets) < currentError
-				) {
+				if (computeAbsoluteError(partSums, targets) < currentError) {
 					const tmp = assignment[i];
 					assignment[i] = assignment[j];
 					assignment[j] = tmp;
@@ -151,9 +146,7 @@ function solveGreedyWithSwaps(
 				partSums[pi] -= items[i];
 				partSums[part] += items[i];
 
-				if (
-					computeAbsoluteError(partSums, targets) < currentError
-				) {
+				if (computeAbsoluteError(partSums, targets) < currentError) {
 					assignment[i] = part;
 					improved = true;
 					break outerMove;
@@ -268,9 +261,7 @@ export function solve(
 	}
 
 	if (partAssignment.length !== items.length) {
-		throw new Error(
-			"Errore interno: conteggio item non corrispondente."
-		);
+		throw new Error("Errore interno: conteggio item non corrispondente.");
 	}
 
 	return buildResult(

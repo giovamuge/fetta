@@ -78,9 +78,7 @@ export function HistorySheet({
 					<>
 						<ScrollArea className="flex-1">
 							{entries.map((entry, i) => {
-								const result = deserializeResult(
-									entry.result
-								);
+								const result = deserializeResult(entry.result);
 								return (
 									<div key={entry.id}>
 										{i > 0 && <Separator />}
@@ -89,10 +87,7 @@ export function HistorySheet({
 												<div className="min-w-0 space-y-0.5">
 													<p className="truncate text-sm font-medium">
 														{entry.proportions
-															.map(
-																(p) =>
-																	p.alias
-															)
+															.map((p) => p.alias)
 															.join(", ")}
 													</p>
 													<p className="text-xs text-muted-foreground">
@@ -108,9 +103,7 @@ export function HistorySheet({
 														variant="ghost"
 														size="icon-sm"
 														onClick={() =>
-															onRestore(
-																entry
-															)
+															onRestore(entry)
 														}
 														aria-label={
 															dict.historyRestore
@@ -122,9 +115,7 @@ export function HistorySheet({
 														variant="ghost"
 														size="icon-sm"
 														onClick={() =>
-															onRemove(
-																entry.id
-															)
+															onRemove(entry.id)
 														}
 														aria-label={
 															dict.historyDelete
@@ -136,23 +127,19 @@ export function HistorySheet({
 											</div>
 
 											<div className="flex flex-wrap gap-1.5">
-												{result.parts.map(
-													(part) => (
-														<Badge
-															key={
-																part.partIndex
-															}
-															variant="secondary"
-														>
-															{part.alias}:{" "}
-															{Math.round(
-																part.assignedWeightKg *
-																	10
-															) / 10}{" "}
-															kg
-														</Badge>
-													)
-												)}
+												{result.parts.map((part) => (
+													<Badge
+														key={part.partIndex}
+														variant="secondary"
+													>
+														{part.alias}:{" "}
+														{Math.round(
+															part.assignedWeightKg *
+																10
+														) / 10}{" "}
+														kg
+													</Badge>
+												))}
 											</div>
 
 											<div className="flex items-center gap-1.5">

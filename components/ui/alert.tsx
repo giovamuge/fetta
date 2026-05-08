@@ -63,10 +63,7 @@ function AlertDescription({
 	);
 }
 
-function AlertAction({
-	className,
-	...props
-}: React.ComponentProps<"div">) {
+function AlertAction({ className, ...props }: React.ComponentProps<"div">) {
 	return (
 		<div
 			data-slot="alert-action"

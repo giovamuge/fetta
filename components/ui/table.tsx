@@ -19,10 +19,7 @@ function Table({ className, ...props }: React.ComponentProps<"table">) {
 	);
 }
 
-function TableHeader({
-	className,
-	...props
-}: React.ComponentProps<"thead">) {
+function TableHeader({ className, ...props }: React.ComponentProps<"thead">) {
 	return (
 		<thead
 			data-slot="table-header"
@@ -32,10 +29,7 @@ function TableHeader({
 	);
 }
 
-function TableBody({
-	className,
-	...props
-}: React.ComponentProps<"tbody">) {
+function TableBody({ className, ...props }: React.ComponentProps<"tbody">) {
 	return (
 		<tbody
 			data-slot="table-body"
@@ -45,10 +39,7 @@ function TableBody({
 	);
 }
 
-function TableFooter({
-	className,
-	...props
-}: React.ComponentProps<"tfoot">) {
+function TableFooter({ className, ...props }: React.ComponentProps<"tfoot">) {
 	return (
 		<tfoot
 			data-slot="table-footer"

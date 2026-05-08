@@ -12,10 +12,7 @@ interface SerializedPartAllocation extends Omit<
 	breakdownBySize: [number, number][];
 }
 
-interface SerializedAllocationResult extends Omit<
-	AllocationResult,
-	"parts"
-> {
+interface SerializedAllocationResult extends Omit<AllocationResult, "parts"> {
 	parts: SerializedPartAllocation[];
 }
 
@@ -29,9 +26,7 @@ export interface HistoryEntry {
 
 // ── Serialization ─────────────────────────────────────────────────────────────
 
-function serializeResult(
-	result: AllocationResult
-): SerializedAllocationResult {
+function serializeResult(result: AllocationResult): SerializedAllocationResult {
 	return {
 		...result,
 		parts: result.parts.map((part) => ({
