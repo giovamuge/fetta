@@ -53,6 +53,13 @@ export const dictionaries = {
 		language: "Lingua",
 		distributionName: "Nome distribuzione",
 		distributionNamePlaceholder: "es. Pane di maggio",
+		importFile: "Importa",
+		importFileHintPackages:
+			"CSV o TXT — una riga per taglia: peso_kg,quantità (es. 5,2)",
+		importFileHintProportions:
+			"CSV o TXT — una riga per partecipante: alias,proporzione (es. Alice,2)",
+		importSuccess: (n: number) => `${n} righe importate`,
+		importErrors: (n: number) => `${n} righe con errori`,
 	},
 	en: {
 		locale: "en" as Locale,
@@ -105,6 +112,13 @@ export const dictionaries = {
 		language: "Language",
 		distributionName: "Distribution name",
 		distributionNamePlaceholder: "e.g. May bread run",
+		importFile: "Import",
+		importFileHintPackages:
+			"CSV or TXT — one row per size: weight_kg,quantity (e.g. 5,2)",
+		importFileHintProportions:
+			"CSV or TXT — one row per participant: alias,proportion (e.g. Alice,2)",
+		importSuccess: (n: number) => `${n} rows imported`,
+		importErrors: (n: number) => `${n} rows with errors`,
 	},
 } satisfies Record<Locale, object>;
 
