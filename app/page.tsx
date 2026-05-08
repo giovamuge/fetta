@@ -48,11 +48,16 @@ export default function Home() {
 	function onSubmit(values: FettaFormValues) {
 		setSolverError(null);
 		try {
-			const allocationResult = solve(values.packages, values.proportions);
+			const allocationResult = solve(
+				values.packages,
+				values.proportions
+			);
 			setResult(allocationResult);
 			save(allocationResult, values.packages, values.proportions);
 		} catch (err) {
-			setSolverError(err instanceof Error ? err.message : "Errore sconosciuto.");
+			setSolverError(
+				err instanceof Error ? err.message : "Errore sconosciuto."
+			);
 			setResult(null);
 		}
 	}
@@ -75,7 +80,9 @@ export default function Home() {
 						<Calculator className="size-9" />
 						{dict.appName}
 					</h1>
-					<p className="text-muted-foreground text-sm">{dict.appDescription}</p>
+					<p className="text-muted-foreground text-sm">
+						{dict.appDescription}
+					</p>
 				</div>
 				<div className="flex items-center gap-2 shrink-0">
 					<LanguageSwitcher />
@@ -90,7 +97,11 @@ export default function Home() {
 			</div>
 
 			<FormProvider {...methods}>
-				<form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4">
+				<form
+					onSubmit={handleSubmit(onSubmit)}
+					noValidate
+					className="space-y-4"
+				>
 					{/* Input grid */}
 					<div className="grid gap-4 md:grid-cols-2">
 						<PackageInput />
@@ -105,10 +116,20 @@ export default function Home() {
 					{solverError && <ErrorAlert message={solverError} />}
 
 					{formState.errors.packages?.root && (
-						<ErrorAlert message={formState.errors.packages.root.message ?? ""} />
+						<ErrorAlert
+							message={
+								formState.errors.packages.root.message ??
+								""
+							}
+						/>
 					)}
 					{formState.errors.proportions?.root && (
-						<ErrorAlert message={formState.errors.proportions.root.message ?? ""} />
+						<ErrorAlert
+							message={
+								formState.errors.proportions.root
+									.message ?? ""
+							}
+						/>
 					)}
 				</form>
 			</FormProvider>

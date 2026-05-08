@@ -3,7 +3,13 @@
 import { Download, FileText } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardAction, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+	Card,
+	CardAction,
+	CardContent,
+	CardHeader,
+	CardTitle,
+} from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import {
 	Table,
@@ -13,7 +19,11 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { useLocale } from "@/components/LocaleProvider";
 import { exportCsv, exportTxt } from "@/lib/exporter";
 import type { AllocationResult } from "@/lib/solver/types";
@@ -44,7 +54,10 @@ function formatPercent(weight: number, total: number): string {
 }
 
 export function ResultsDisplay({ result }: ResultsDisplayProps) {
-	const totalProp = result.parts.reduce((s, p) => s + p.proportionWeight, 0);
+	const totalProp = result.parts.reduce(
+		(s, p) => s + p.proportionWeight,
+		0
+	);
 	const { dict } = useLocale();
 
 	return (
@@ -53,11 +66,19 @@ export function ResultsDisplay({ result }: ResultsDisplayProps) {
 				<CardTitle>{dict.resultsTitle}</CardTitle>
 				<CardAction>
 					<div className="flex gap-2">
-						<Button variant="outline" size="sm" onClick={() => exportCsv(result)}>
+						<Button
+							variant="outline"
+							size="sm"
+							onClick={() => exportCsv(result)}
+						>
 							<Download />
 							CSV
 						</Button>
-						<Button variant="outline" size="sm" onClick={() => exportTxt(result)}>
+						<Button
+							variant="outline"
+							size="sm"
+							onClick={() => exportTxt(result)}
+						>
 							<FileText />
 							TXT
 						</Button>
@@ -70,13 +91,19 @@ export function ResultsDisplay({ result }: ResultsDisplayProps) {
 				<div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
 					<Card size="sm">
 						<CardContent className="flex flex-col gap-0.5">
-							<p className="text-xs text-muted-foreground">{dict.totalWeight}</p>
-							<p className="font-semibold">{formatKg(result.totalWeightKg)}</p>
+							<p className="text-xs text-muted-foreground">
+								{dict.totalWeight}
+							</p>
+							<p className="font-semibold">
+								{formatKg(result.totalWeightKg)}
+							</p>
 						</CardContent>
 					</Card>
 					<Card size="sm">
 						<CardContent className="flex flex-col gap-0.5">
-							<p className="text-xs text-muted-foreground">{dict.assignedPackages}</p>
+							<p className="text-xs text-muted-foreground">
+								{dict.assignedPackages}
+							</p>
 							<p className="font-semibold">
 								{result.totalAssignedPackageCount}
 								<span className="text-muted-foreground font-normal">
@@ -87,14 +114,26 @@ export function ResultsDisplay({ result }: ResultsDisplayProps) {
 					</Card>
 					<Card size="sm">
 						<CardContent className="flex flex-col gap-0.5">
-							<p className="text-xs text-muted-foreground">{dict.totalError}</p>
-							<p className="font-semibold">{formatKg(result.totalAbsoluteErrorKg)}</p>
+							<p className="text-xs text-muted-foreground">
+								{dict.totalError}
+							</p>
+							<p className="font-semibold">
+								{formatKg(result.totalAbsoluteErrorKg)}
+							</p>
 						</CardContent>
 					</Card>
 					<Card size="sm">
 						<CardContent className="flex flex-col gap-1">
-							<p className="text-xs text-muted-foreground">{dict.strategy}</p>
-							<Badge variant={result.strategyUsed === "exact" ? "default" : "secondary"}>
+							<p className="text-xs text-muted-foreground">
+								{dict.strategy}
+							</p>
+							<Badge
+								variant={
+									result.strategyUsed === "exact"
+										? "default"
+										: "secondary"
+								}
+							>
 								{result.strategyUsed}
 							</Badge>
 						</CardContent>
@@ -108,18 +147,31 @@ export function ResultsDisplay({ result }: ResultsDisplayProps) {
 					<TableHeader>
 						<TableRow>
 							<TableHead>{dict.alias}</TableHead>
-							<TableHead className="text-right">{dict.proportionHeader}</TableHead>
-							<TableHead className="text-right">{dict.target}</TableHead>
-							<TableHead className="text-right">{dict.assigned}</TableHead>
-							<TableHead className="text-right">{dict.delta}</TableHead>
-							<TableHead className="text-right">{dict.packagesCount}</TableHead>
+							<TableHead className="text-right">
+								{dict.proportionHeader}
+							</TableHead>
+							<TableHead className="text-right">
+								{dict.target}
+							</TableHead>
+							<TableHead className="text-right">
+								{dict.assigned}
+							</TableHead>
+							<TableHead className="text-right">
+								{dict.delta}
+							</TableHead>
+							<TableHead className="text-right">
+								{dict.packagesCount}
+							</TableHead>
 							<TableHead>{dict.composition}</TableHead>
 						</TableRow>
 					</TableHeader>
 					<TableBody>
 						{result.parts.map((part) => {
-							const delta = part.assignedWeightKg - part.targetWeightKg;
-							const deltaNum = Math.round(delta * 1000) / 1000;
+							const delta =
+								part.assignedWeightKg -
+								part.targetWeightKg;
+							const deltaNum =
+								Math.round(delta * 1000) / 1000;
 							const deltaLabel =
 								deltaNum === 0
 									? dict.deltaNoError
@@ -128,9 +180,14 @@ export function ResultsDisplay({ result }: ResultsDisplayProps) {
 										: dict.deltaUnder;
 							return (
 								<TableRow key={part.partIndex}>
-									<TableCell className="font-medium">{part.alias}</TableCell>
+									<TableCell className="font-medium">
+										{part.alias}
+									</TableCell>
 									<TableCell className="text-right text-muted-foreground">
-										{formatPercent(part.proportionWeight, totalProp)}
+										{formatPercent(
+											part.proportionWeight,
+											totalProp
+										)}
 									</TableCell>
 									<TableCell className="text-right">
 										{formatKg(part.targetWeightKg)}
@@ -148,13 +205,21 @@ export function ResultsDisplay({ result }: ResultsDisplayProps) {
 										}`}
 									>
 										<Tooltip>
-											<TooltipTrigger>{formatDelta(delta)}</TooltipTrigger>
-											<TooltipContent>{deltaLabel}</TooltipContent>
+											<TooltipTrigger>
+												{formatDelta(delta)}
+											</TooltipTrigger>
+											<TooltipContent>
+												{deltaLabel}
+											</TooltipContent>
 										</Tooltip>
 									</TableCell>
-									<TableCell className="text-right">{part.packageCount}</TableCell>
+									<TableCell className="text-right">
+										{part.packageCount}
+									</TableCell>
 									<TableCell className="text-muted-foreground text-sm">
-										{formatComposition(part.breakdownBySize)}
+										{formatComposition(
+											part.breakdownBySize
+										)}
 									</TableCell>
 								</TableRow>
 							);
@@ -165,4 +230,3 @@ export function ResultsDisplay({ result }: ResultsDisplayProps) {
 		</Card>
 	);
 }
-

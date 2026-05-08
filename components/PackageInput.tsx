@@ -3,7 +3,13 @@
 import { Plus, Trash2 } from "lucide-react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardHeader,
+	CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { useLocale } from "@/components/LocaleProvider";
 import type { FettaFormValues } from "@/lib/schema";
@@ -24,18 +30,27 @@ export function PackageInput() {
 		<Card>
 			<CardHeader>
 				<CardTitle>{dict.packagesTitle}</CardTitle>
-				<CardDescription>{dict.packagesDescription}</CardDescription>
+				<CardDescription>
+					{dict.packagesDescription}
+				</CardDescription>
 			</CardHeader>
 			<CardContent className="space-y-3">
 				{/* Column headers */}
 				<div className="grid grid-cols-[1fr_1fr_auto] gap-2 px-1">
-					<span className="text-xs font-medium text-muted-foreground">{dict.weightKg}</span>
-					<span className="text-xs font-medium text-muted-foreground">{dict.quantity}</span>
+					<span className="text-xs font-medium text-muted-foreground">
+						{dict.weightKg}
+					</span>
+					<span className="text-xs font-medium text-muted-foreground">
+						{dict.quantity}
+					</span>
 					<span />
 				</div>
 
 				{fields.map((field, index) => (
-					<div key={field.id} className="grid grid-cols-[1fr_1fr_auto] gap-2 items-start">
+					<div
+						key={field.id}
+						className="grid grid-cols-[1fr_1fr_auto] gap-2 items-start"
+					>
 						<div>
 							<Input
 								type="number"
@@ -43,11 +58,16 @@ export function PackageInput() {
 								min="0.001"
 								placeholder="es. 5"
 								{...register(`packages.${index}.weightKg`)}
-								aria-invalid={!!errors.packages?.[index]?.weightKg}
+								aria-invalid={
+									!!errors.packages?.[index]?.weightKg
+								}
 							/>
 							{errors.packages?.[index]?.weightKg && (
 								<p className="text-xs text-destructive mt-1">
-									{errors.packages[index]?.weightKg?.message}
+									{
+										errors.packages[index]?.weightKg
+											?.message
+									}
 								</p>
 							)}
 						</div>
@@ -57,12 +77,20 @@ export function PackageInput() {
 								step="1"
 								min="1"
 								placeholder="es. 3"
-								{...register(`packages.${index}.availableCount`)}
-								aria-invalid={!!errors.packages?.[index]?.availableCount}
+								{...register(
+									`packages.${index}.availableCount`
+								)}
+								aria-invalid={
+									!!errors.packages?.[index]
+										?.availableCount
+								}
 							/>
 							{errors.packages?.[index]?.availableCount && (
 								<p className="text-xs text-destructive mt-1">
-									{errors.packages[index]?.availableCount?.message}
+									{
+										errors.packages[index]
+											?.availableCount?.message
+									}
 								</p>
 							)}
 						</div>
@@ -85,7 +113,9 @@ export function PackageInput() {
 					variant="outline"
 					size="sm"
 					className="w-full"
-					onClick={() => append({ weightKg: NaN, availableCount: NaN })}
+					onClick={() =>
+						append({ weightKg: NaN, availableCount: NaN })
+					}
 				>
 					<Plus />
 					{dict.addPackage}
@@ -94,4 +124,3 @@ export function PackageInput() {
 		</Card>
 	);
 }
-

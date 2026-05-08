@@ -5,11 +5,17 @@ const MAX_ENTRIES = 20;
 
 // ── Serializable types (Map<number,number> → tuple array) ────────────────────
 
-interface SerializedPartAllocation extends Omit<PartAllocation, "breakdownBySize"> {
+interface SerializedPartAllocation extends Omit<
+	PartAllocation,
+	"breakdownBySize"
+> {
 	breakdownBySize: [number, number][];
 }
 
-interface SerializedAllocationResult extends Omit<AllocationResult, "parts"> {
+interface SerializedAllocationResult extends Omit<
+	AllocationResult,
+	"parts"
+> {
 	parts: SerializedPartAllocation[];
 }
 
@@ -23,7 +29,9 @@ export interface HistoryEntry {
 
 // ── Serialization ─────────────────────────────────────────────────────────────
 
-function serializeResult(result: AllocationResult): SerializedAllocationResult {
+function serializeResult(
+	result: AllocationResult
+): SerializedAllocationResult {
 	return {
 		...result,
 		parts: result.parts.map((part) => ({
@@ -33,7 +41,9 @@ function serializeResult(result: AllocationResult): SerializedAllocationResult {
 	};
 }
 
-export function deserializeResult(serialized: SerializedAllocationResult): AllocationResult {
+export function deserializeResult(
+	serialized: SerializedAllocationResult
+): AllocationResult {
 	return {
 		...serialized,
 		parts: serialized.parts.map((part) => ({

@@ -3,7 +3,13 @@
 import { Plus, Trash2 } from "lucide-react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardHeader,
+	CardTitle,
+} from "@/components/ui/card";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { useLocale } from "@/components/LocaleProvider";
@@ -25,34 +31,53 @@ export function ProportionInput() {
 		<Card>
 			<CardHeader>
 				<CardTitle>{dict.proportionsTitle}</CardTitle>
-				<CardDescription>{dict.proportionsDescription}</CardDescription>
+				<CardDescription>
+					{dict.proportionsDescription}
+				</CardDescription>
 			</CardHeader>
 			<CardContent className="space-y-4">
 				{fields.map((field, index) => {
 					const errs = errors.proportions?.[index];
 					return (
-						<div key={field.id} className="flex gap-2 items-start">
+						<div
+							key={field.id}
+							className="flex gap-2 items-start"
+						>
 							<Field
-								data-invalid={errs?.alias ? "true" : undefined}
+								data-invalid={
+									errs?.alias ? "true" : undefined
+								}
 								className="flex-1"
 							>
-								<FieldLabel htmlFor={`proportions.${index}.alias`}>
+								<FieldLabel
+									htmlFor={`proportions.${index}.alias`}
+								>
 									{dict.aliasName}
 								</FieldLabel>
 								<Input
 									id={`proportions.${index}.alias`}
 									type="text"
 									placeholder={`es. Parte ${index + 1}`}
-									{...register(`proportions.${index}.alias`)}
+									{...register(
+										`proportions.${index}.alias`
+									)}
 								/>
-								<FieldError errors={errs?.alias ? [errs.alias] : []} />
+								<FieldError
+									errors={
+										errs?.alias ? [errs.alias] : []
+									}
+								/>
 							</Field>
 
 							<Field
-								data-invalid={errs?.weight ? "true" : undefined}
+								data-invalid={
+									errs?.weight ? "true" : undefined
+								}
 								className="flex-1"
 							>
-								<FieldLabel htmlFor={`proportions.${index}.weight`}>
+								<FieldLabel
+									htmlFor={`proportions.${index}.weight`}
+								>
 									{dict.proportion}
 								</FieldLabel>
 								<Input
@@ -61,9 +86,15 @@ export function ProportionInput() {
 									step="0.1"
 									min="0.001"
 									placeholder="es. 2"
-									{...register(`proportions.${index}.weight`)}
+									{...register(
+										`proportions.${index}.weight`
+									)}
 								/>
-								<FieldError errors={errs?.weight ? [errs.weight] : []} />
+								<FieldError
+									errors={
+										errs?.weight ? [errs.weight] : []
+									}
+								/>
 							</Field>
 
 							<Button
@@ -95,4 +126,3 @@ export function ProportionInput() {
 		</Card>
 	);
 }
-

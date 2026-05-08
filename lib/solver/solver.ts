@@ -1,4 +1,9 @@
-import type { AllocationResult, NamedProportion, PackageType, PartAllocation } from "./types";
+import type {
+	AllocationResult,
+	NamedProportion,
+	PackageType,
+	PartAllocation,
+} from "./types";
 
 // ── Threshold ──────────────────────────────────────────────────────────────────
 // Keep DFS nodes under ~500 000: maxItems = floor(log(500000) / log(partCount))
@@ -30,7 +35,10 @@ function computeAbsoluteError(sums: number[], targets: number[]): number {
 
 // ── Exact DFS ──────────────────────────────────────────────────────────────────
 
-function solveExact(items: readonly number[], targets: number[]): number[] {
+function solveExact(
+	items: readonly number[],
+	targets: number[]
+): number[] {
 	const n = items.length;
 	const p = targets.length;
 	const partSums = new Array<number>(p).fill(0);
@@ -77,7 +85,10 @@ function solveExact(items: readonly number[], targets: number[]): number[] {
 
 // ── Greedy + iterative local improvement ───────────────────────────────────────
 
-function solveGreedyWithSwaps(items: readonly number[], targets: number[]): number[] {
+function solveGreedyWithSwaps(
+	items: readonly number[],
+	targets: number[]
+): number[] {
 	const n = items.length;
 	const p = targets.length;
 	const assignment = new Array<number>(n).fill(0);
@@ -114,7 +125,9 @@ function solveGreedyWithSwaps(items: readonly number[], targets: number[]): numb
 				partSums[pi] += items[j] - items[i];
 				partSums[pj] += items[i] - items[j];
 
-				if (computeAbsoluteError(partSums, targets) < currentError) {
+				if (
+					computeAbsoluteError(partSums, targets) < currentError
+				) {
 					const tmp = assignment[i];
 					assignment[i] = assignment[j];
 					assignment[j] = tmp;
@@ -138,7 +151,9 @@ function solveGreedyWithSwaps(items: readonly number[], targets: number[]): numb
 				partSums[pi] -= items[i];
 				partSums[part] += items[i];
 
-				if (computeAbsoluteError(partSums, targets) < currentError) {
+				if (
+					computeAbsoluteError(partSums, targets) < currentError
+				) {
 					assignment[i] = part;
 					improved = true;
 					break outerMove;
@@ -167,7 +182,10 @@ function buildResult(
 ): AllocationResult {
 	const p = proportions.length;
 	const partSums = new Array<number>(p).fill(0);
-	const breakdowns: Map<number, number>[] = Array.from({ length: p }, () => new Map());
+	const breakdowns: Map<number, number>[] = Array.from(
+		{ length: p },
+		() => new Map()
+	);
 
 	for (let i = 0; i < items.length; i++) {
 		const part = partAssignment[i];
@@ -183,7 +201,10 @@ function buildResult(
 		targetWeightKg: targets[part],
 		assignedWeightKg: partSums[part],
 		breakdownBySize: breakdowns[part],
-		packageCount: Array.from(breakdowns[part].values()).reduce((a, b) => a + b, 0),
+		packageCount: Array.from(breakdowns[part].values()).reduce(
+			(a, b) => a + b,
+			0
+		),
 	}));
 
 	const totalAbsoluteErrorKg = computeAbsoluteError(partSums, targets);
@@ -194,7 +215,10 @@ function buildResult(
 		totalInputPackageCount: totalPackageCount,
 		totalAbsoluteErrorKg,
 		strategyUsed: strategy,
-		totalAssignedPackageCount: parts.reduce((a, p) => a + p.packageCount, 0),
+		totalAssignedPackageCount: parts.reduce(
+			(a, p) => a + p.packageCount,
+			0
+		),
 	};
 }
 
@@ -211,15 +235,22 @@ export function solve(
 		throw new Error("È richiesta almeno una proporzione.");
 	}
 
-	const normalizedPackages = [...packageTypes].sort((a, b) => b.weightKg - a.weightKg);
-	const totalPackageCount = normalizedPackages.reduce((s, p) => s + p.availableCount, 0);
+	const normalizedPackages = [...packageTypes].sort(
+		(a, b) => b.weightKg - a.weightKg
+	);
+	const totalPackageCount = normalizedPackages.reduce(
+		(s, p) => s + p.availableCount,
+		0
+	);
 	const totalWeight = normalizedPackages.reduce(
 		(s, p) => s + p.weightKg * p.availableCount,
 		0
 	);
 
 	const totalProportion = proportions.reduce((s, p) => s + p.weight, 0);
-	const targets = proportions.map((p) => totalWeight * (p.weight / totalProportion));
+	const targets = proportions.map(
+		(p) => totalWeight * (p.weight / totalProportion)
+	);
 
 	const items = expandItems(normalizedPackages);
 	const partCount = proportions.length;
@@ -237,7 +268,9 @@ export function solve(
 	}
 
 	if (partAssignment.length !== items.length) {
-		throw new Error("Errore interno: conteggio item non corrispondente.");
+		throw new Error(
+			"Errore interno: conteggio item non corrispondente."
+		);
 	}
 
 	return buildResult(

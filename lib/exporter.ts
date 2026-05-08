@@ -33,19 +33,29 @@ function buildCsvContent(result: AllocationResult): string {
 	lines.push(`# Totale peso,${formatKg(result.totalWeightKg)}`);
 	lines.push(`# Pacchi in ingresso,${result.totalInputPackageCount}`);
 	lines.push(`# Pacchi distribuiti,${result.totalAssignedPackageCount}`);
-	lines.push(`# Errore assoluto totale,${formatKg(result.totalAbsoluteErrorKg)}`);
+	lines.push(
+		`# Errore assoluto totale,${formatKg(result.totalAbsoluteErrorKg)}`
+	);
 	lines.push(`# Strategia,${result.strategyUsed}`);
 	lines.push("");
 
 	// Column headers
-	lines.push("Alias,Proporzione,Target (kg),Assegnato (kg),Delta (kg),N. Pacchi,Composizione");
+	lines.push(
+		"Alias,Proporzione,Target (kg),Assegnato (kg),Delta (kg),N. Pacchi,Composizione"
+	);
 
-	const totalProp = result.parts.reduce((s, p) => s + p.proportionWeight, 0);
+	const totalProp = result.parts.reduce(
+		(s, p) => s + p.proportionWeight,
+		0
+	);
 
 	for (const part of result.parts) {
 		const delta = part.assignedWeightKg - part.targetWeightKg;
 		const composition = formatComposition(part.breakdownBySize);
-		const propPct = formatProportionPercent(part.proportionWeight, totalProp);
+		const propPct = formatProportionPercent(
+			part.proportionWeight,
+			totalProp
+		);
 		const target = Math.round(part.targetWeightKg * 1000) / 1000;
 		const assigned = Math.round(part.assignedWeightKg * 1000) / 1000;
 		const deltaVal = Math.round(delta * 1000) / 1000;
@@ -61,7 +71,8 @@ function buildCsvContent(result: AllocationResult): string {
 // ── TXT ────────────────────────────────────────────────────────────────────────
 
 function buildTxtContent(result: AllocationResult): string {
-	const SEP = "------------------------------------------------------------------------";
+	const SEP =
+		"------------------------------------------------------------------------";
 	const lines: string[] = [];
 
 	lines.push("Risultato allocazione");
@@ -70,7 +81,9 @@ function buildTxtContent(result: AllocationResult): string {
 	lines.push(
 		`Controllo pacchi: ✓  ${result.totalInputPackageCount} in ingresso → ${result.totalAssignedPackageCount} distribuiti`
 	);
-	lines.push(`Errore assoluto totale (kg): ${formatKg(result.totalAbsoluteErrorKg)}`);
+	lines.push(
+		`Errore assoluto totale (kg): ${formatKg(result.totalAbsoluteErrorKg)}`
+	);
 	lines.push(`Strategia: ${result.strategyUsed}`);
 	lines.push("");
 
@@ -91,7 +104,11 @@ function buildTxtContent(result: AllocationResult): string {
 
 // ── Download trigger ───────────────────────────────────────────────────────────
 
-function downloadBlob(content: string, filename: string, mimeType: string): void {
+function downloadBlob(
+	content: string,
+	filename: string,
+	mimeType: string
+): void {
 	const blob = new Blob([content], { type: mimeType });
 	const url = URL.createObjectURL(blob);
 	const anchor = document.createElement("a");
@@ -110,10 +127,18 @@ function timestampedFilename(ext: string): string {
 
 export function exportCsv(result: AllocationResult): void {
 	const content = buildCsvContent(result);
-	downloadBlob(content, timestampedFilename("csv"), "text/csv;charset=utf-8;");
+	downloadBlob(
+		content,
+		timestampedFilename("csv"),
+		"text/csv;charset=utf-8;"
+	);
 }
 
 export function exportTxt(result: AllocationResult): void {
 	const content = buildTxtContent(result);
-	downloadBlob(content, timestampedFilename("txt"), "text/plain;charset=utf-8;");
+	downloadBlob(
+		content,
+		timestampedFilename("txt"),
+		"text/plain;charset=utf-8;"
+	);
 }

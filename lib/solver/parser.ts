@@ -11,7 +11,10 @@ export function parsePackages(rawInput: string): PackageType[] {
 		throw new Error("Il catalogo pacchi non può essere vuoto.");
 	}
 
-	const chunks = trimmed.split(",").map((c) => c.trim()).filter(Boolean);
+	const chunks = trimmed
+		.split(",")
+		.map((c) => c.trim())
+		.filter(Boolean);
 	const result: PackageType[] = [];
 
 	for (const chunk of chunks) {
@@ -38,7 +41,9 @@ export function parsePackages(rawInput: string): PackageType[] {
 	}
 
 	if (result.length === 0) {
-		throw new Error("Il catalogo pacchi non contiene pacchi disponibili.");
+		throw new Error(
+			"Il catalogo pacchi non contiene pacchi disponibili."
+		);
 	}
 
 	return result;
@@ -98,7 +103,9 @@ export function parseProportions(rawInput: string): NamedProportion[] {
 			throw new Error(`Valore proporzione non valido: "${token}".`);
 		}
 		if (value <= 0) {
-			throw new Error("Tutte le proporzioni devono essere maggiori di zero.");
+			throw new Error(
+				"Tutte le proporzioni devono essere maggiori di zero."
+			);
 		}
 
 		values.push({ alias, weight: value });

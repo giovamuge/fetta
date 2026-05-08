@@ -28,7 +28,11 @@ export function ThemeToggle() {
 		<DropdownMenu>
 			<DropdownMenuTrigger
 				render={
-					<Button variant="outline" size="icon" aria-label={dict.theme}>
+					<Button
+						variant="outline"
+						size="icon"
+						aria-label={dict.theme}
+					>
 						{icon}
 					</Button>
 				}

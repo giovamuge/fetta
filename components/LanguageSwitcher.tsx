@@ -23,7 +23,11 @@ export function LanguageSwitcher() {
 		<DropdownMenu>
 			<DropdownMenuTrigger
 				render={
-					<Button variant="outline" size="icon" aria-label={dict.language}>
+					<Button
+						variant="outline"
+						size="icon"
+						aria-label={dict.language}
+					>
 						<Globe />
 					</Button>
 				}

@@ -24,16 +24,24 @@ interface HistorySheetProps {
 	onClear: () => void;
 }
 
-export function HistorySheet({ entries, onRestore, onRemove, onClear }: HistorySheetProps) {
+export function HistorySheet({
+	entries,
+	onRestore,
+	onRemove,
+	onClear,
+}: HistorySheetProps) {
 	const { dict, locale } = useLocale();
 
-	const dateFormatter = new Intl.DateTimeFormat(locale === "it" ? "it-IT" : "en-GB", {
-		day: "2-digit",
-		month: "short",
-		year: "numeric",
-		hour: "2-digit",
-		minute: "2-digit",
-	});
+	const dateFormatter = new Intl.DateTimeFormat(
+		locale === "it" ? "it-IT" : "en-GB",
+		{
+			day: "2-digit",
+			month: "short",
+			year: "numeric",
+			hour: "2-digit",
+			minute: "2-digit",
+		}
+	);
 
 	return (
 		<Sheet>
@@ -43,7 +51,10 @@ export function HistorySheet({ entries, onRestore, onRemove, onClear }: HistoryS
 						<History />
 						{dict.history}
 						{entries.length > 0 && (
-							<Badge variant="secondary" className="ml-1 h-4 min-w-4 px-1 text-[10px]">
+							<Badge
+								variant="secondary"
+								className="ml-1 h-4 min-w-4 px-1 text-[10px]"
+							>
 								{entries.length}
 							</Badge>
 						)}
@@ -54,7 +65,9 @@ export function HistorySheet({ entries, onRestore, onRemove, onClear }: HistoryS
 			<SheetContent side="right">
 				<SheetHeader>
 					<SheetTitle>{dict.historyTitle}</SheetTitle>
-					<SheetDescription>{dict.historyDescription}</SheetDescription>
+					<SheetDescription>
+						{dict.historyDescription}
+					</SheetDescription>
 				</SheetHeader>
 
 				{entries.length === 0 ? (
@@ -65,7 +78,9 @@ export function HistorySheet({ entries, onRestore, onRemove, onClear }: HistoryS
 					<>
 						<ScrollArea className="flex-1">
 							{entries.map((entry, i) => {
-								const result = deserializeResult(entry.result);
+								const result = deserializeResult(
+									entry.result
+								);
 								return (
 									<div key={entry.id}>
 										{i > 0 && <Separator />}
@@ -73,26 +88,47 @@ export function HistorySheet({ entries, onRestore, onRemove, onClear }: HistoryS
 											<div className="flex items-start justify-between gap-2">
 												<div className="min-w-0 space-y-0.5">
 													<p className="truncate text-sm font-medium">
-														{entry.proportions.map((p) => p.alias).join(", ")}
+														{entry.proportions
+															.map(
+																(p) =>
+																	p.alias
+															)
+															.join(", ")}
 													</p>
 													<p className="text-xs text-muted-foreground">
-														{dateFormatter.format(new Date(entry.createdAt))}
+														{dateFormatter.format(
+															new Date(
+																entry.createdAt
+															)
+														)}
 													</p>
 												</div>
 												<div className="flex shrink-0 gap-1">
 													<Button
 														variant="ghost"
 														size="icon-sm"
-														onClick={() => onRestore(entry)}
-														aria-label={dict.historyRestore}
+														onClick={() =>
+															onRestore(
+																entry
+															)
+														}
+														aria-label={
+															dict.historyRestore
+														}
 													>
 														<RotateCcw />
 													</Button>
 													<Button
 														variant="ghost"
 														size="icon-sm"
-														onClick={() => onRemove(entry.id)}
-														aria-label={dict.historyDelete}
+														onClick={() =>
+															onRemove(
+																entry.id
+															)
+														}
+														aria-label={
+															dict.historyDelete
+														}
 													>
 														<Trash2 />
 													</Button>
@@ -100,23 +136,51 @@ export function HistorySheet({ entries, onRestore, onRemove, onClear }: HistoryS
 											</div>
 
 											<div className="flex flex-wrap gap-1.5">
-												{result.parts.map((part) => (
-													<Badge key={part.partIndex} variant="secondary">
-														{part.alias}: {Math.round(part.assignedWeightKg * 10) / 10} kg
-													</Badge>
-												))}
+												{result.parts.map(
+													(part) => (
+														<Badge
+															key={
+																part.partIndex
+															}
+															variant="secondary"
+														>
+															{part.alias}:{" "}
+															{Math.round(
+																part.assignedWeightKg *
+																	10
+															) / 10}{" "}
+															kg
+														</Badge>
+													)
+												)}
 											</div>
 
 											<div className="flex items-center gap-1.5">
 												<Badge variant="outline">
-													{result.totalAssignedPackageCount}/{result.totalInputPackageCount}{" "}
+													{
+														result.totalAssignedPackageCount
+													}
+													/
+													{
+														result.totalInputPackageCount
+													}{" "}
 													{dict.packages.toLowerCase()}
 												</Badge>
 												<Badge variant="outline">
-													Δ {Math.round(result.totalAbsoluteErrorKg * 1000) / 1000} kg
+													Δ{" "}
+													{Math.round(
+														result.totalAbsoluteErrorKg *
+															1000
+													) / 1000}{" "}
+													kg
 												</Badge>
 												<Badge
-													variant={result.strategyUsed === "exact" ? "default" : "secondary"}
+													variant={
+														result.strategyUsed ===
+														"exact"
+															? "default"
+															: "secondary"
+													}
 												>
 													{result.strategyUsed}
 												</Badge>
@@ -128,7 +192,12 @@ export function HistorySheet({ entries, onRestore, onRemove, onClear }: HistoryS
 						</ScrollArea>
 
 						<SheetFooter>
-							<Button variant="outline" size="sm" className="w-full" onClick={onClear}>
+							<Button
+								variant="outline"
+								size="sm"
+								className="w-full"
+								onClick={onClear}
+							>
 								<Trash2 />
 								{dict.historyClear}
 							</Button>
@@ -139,4 +208,3 @@ export function HistorySheet({ entries, onRestore, onRemove, onClear }: HistoryS
 		</Sheet>
 	);
 }
-

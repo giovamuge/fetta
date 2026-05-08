@@ -1,7 +1,11 @@
 "use client";
 
 import { AlertCircle } from "lucide-react";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import {
+	Alert,
+	AlertDescription,
+	AlertTitle,
+} from "@/components/ui/alert";
 import { useLocale } from "@/components/LocaleProvider";
 
 interface ErrorAlertProps {
@@ -18,4 +22,3 @@ export function ErrorAlert({ message }: ErrorAlertProps) {
 		</Alert>
 	);
 }
-
