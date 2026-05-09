@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { LocaleProvider } from "@/components/LocaleProvider";
+import { Analytics } from "@vercel/analytics/next"
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
@@ -86,6 +87,7 @@ export default function RootLayout({
 					</LocaleProvider>
 				</ThemeProvider>
 			</body>
+			<Analytics/>
 		</html>
 	);
 }
